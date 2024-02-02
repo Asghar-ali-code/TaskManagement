@@ -27,13 +27,13 @@ import com.example.conovotaskmanagement.util.UiEvent
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddEditTaskScreen(
-    onPopBackStack : () -> Unit,
+    onPopBackStack: () -> Unit,
     viewModel: AddEditTaskViewModel = hiltViewModel()
-){
+) {
     val snackBarHostState = remember { SnackbarHostState() }
-    LaunchedEffect(key1 = true){
-        viewModel.uiEvent.collect{ event ->
-            when(event){
+    LaunchedEffect(key1 = true) {
+        viewModel.uiEvent.collect { event ->
+            when (event) {
                 is UiEvent.PopBackStack -> onPopBackStack()
                 is UiEvent.ShowSnackbar -> {
                     snackBarHostState.showSnackbar(
@@ -41,11 +41,12 @@ fun AddEditTaskScreen(
                         actionLabel = event.action
                     )
                 }
+
                 else -> Unit
             }
         }
     }
-    
+
     Scaffold(
         snackbarHost = { SnackbarHost(snackBarHostState) },
         modifier = Modifier
@@ -61,7 +62,7 @@ fun AddEditTaskScreen(
                 )
             }
         }
-    ){
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -80,8 +81,8 @@ fun AddEditTaskScreen(
             Spacer(modifier = Modifier.height(8.dp))
             TextField(
                 value = viewModel.description,
-                onValueChange = {
-                    viewModel.onEvent(AddEditTodoEvent.OnDescriptionChange(it))
+                onValueChange = {value->
+                    viewModel.onEvent(AddEditTodoEvent.OnDescriptionChange(value))
                 },
                 placeholder = {
                     Text(text = "Description")

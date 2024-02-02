@@ -9,7 +9,7 @@ interface RepositoryInf {
 
     suspend fun deleteTodo(todo: TaskEntity)
 
-    suspend fun getTodoById(Id:Int): TaskEntity?
+    suspend fun getTodoById(Id: Int): TaskEntity?
 
     fun getTodos(): Flow<List<TaskEntity>>
 }
