@@ -9,12 +9,16 @@ import androidx.room.migration.AutoMigrationSpec
 @Database(
     entities = [TaskEntity::class],
     version = 2,
-    autoMigrations = [ AutoMigration(from=1, to=2, spec = com.example.conovotaskmanagement.db.Database.Migration1To2::class)]
+    autoMigrations = [AutoMigration(
+        from = 1,
+        to = 2,
+        spec = com.example.conovotaskmanagement.db.Database.Migration1To2::class
+    )]
 )
-abstract class Database: RoomDatabase() {
+abstract class Database : RoomDatabase() {
 
     abstract val dao: Dao
 
     @RenameColumn(tableName = "task", fromColumnName = "isDone", toColumnName = "isTaskCompleted")
-    class Migration1To2:AutoMigrationSpec
+    class Migration1To2 : AutoMigrationSpec
 }

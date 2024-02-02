@@ -1,4 +1,4 @@
-package com.example.mvvmtodoapp.util
+package com.example.conovotaskmanagement.util
 
 object Routes {
     const val TASK_LIST = "task_list"

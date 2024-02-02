@@ -9,5 +9,5 @@ data class TaskEntity(
     val title: String,
     val description: String?,
     val isTaskCompleted: Boolean,
-    @PrimaryKey val id: Int? =null
+    @PrimaryKey val id: Int? = null
 )

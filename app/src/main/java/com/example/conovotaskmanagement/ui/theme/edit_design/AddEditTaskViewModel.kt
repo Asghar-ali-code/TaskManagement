@@ -19,7 +19,7 @@ import javax.inject.Inject
 class AddEditTaskViewModel @Inject constructor(
     private val repository: RepositoryInf,
     savedStateHandle: SavedStateHandle
-): ViewModel() {
+) : ViewModel() {
 
     var task by mutableStateOf<TaskEntity?>(null)
 
@@ -35,7 +35,7 @@ class AddEditTaskViewModel @Inject constructor(
 
     init {
         val todoId = savedStateHandle.get<Int>("taskId")
-        if (todoId != -1){
+        if (todoId != -1) {
             viewModelScope.launch {
                 if (todoId != null) {
                     repository.getTodoById(todoId)?.let { task ->
@@ -48,27 +48,31 @@ class AddEditTaskViewModel @Inject constructor(
         }
     }
 
-    fun onEvent(event: AddEditTodoEvent){
-        when(event){
+    fun onEvent(event: AddEditTodoEvent) {
+        when (event) {
             is AddEditTodoEvent.OnTitleChange -> {
                 title = event.title
             }
+
             is AddEditTodoEvent.OnDescriptionChange -> {
                 description = event.description
             }
+
             is AddEditTodoEvent.OnSaveTodoClick -> {
                 viewModelScope.launch {
-                    if(title.isBlank()){
-                        sendUiEvent(UiEvent.ShowSnackbar(
-                            message = "The title can't be empty"
-                        ))
+                    if (title.isBlank()) {
+                        sendUiEvent(
+                            UiEvent.ShowSnackbar(
+                                message = "The title can't be empty"
+                            )
+                        )
                         return@launch
                     }
                     repository.insertTodo(
                         TaskEntity(
                             title = title,
                             description = description,
-                            isTaskCompleted = task?.isTaskCompleted?:false,
+                            isTaskCompleted = task?.isTaskCompleted ?: false,
                             id = task?.id
                         )
                     )
@@ -77,7 +81,8 @@ class AddEditTaskViewModel @Inject constructor(
             }
         }
     }
-//send events to update the ui
+
+    //send events to update the ui
     private fun sendUiEvent(event: UiEvent) {
         viewModelScope.launch {
             _uiEvent.send(event)

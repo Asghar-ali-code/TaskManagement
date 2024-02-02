@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.conovotaskmanagement.db.TaskEntity
 import com.example.conovotaskmanagement.repo.RepositoryInf
 import com.example.conovotaskmanagement.util.UiEvent
-import com.example.mvvmtodoapp.util.Routes
+import com.example.conovotaskmanagement.util.Routes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -15,8 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TaskListViewModel @Inject constructor(
     private val repository: RepositoryInf
-)
-: ViewModel() {
+) : ViewModel() {
 
     val tasks = repository.getTodos()
 
@@ -26,23 +25,28 @@ class TaskListViewModel @Inject constructor(
     private var deletedTodo: TaskEntity? = null
 
     fun onEvent(event: TaskListEvent) {
-        when(event) {
+        when (event) {
             is TaskListEvent.OnDeleteTaskClick -> {
                 viewModelScope.launch {
                     deletedTodo = event.task
                     repository.deleteTodo(event.task)
-                    sendUiEvent(UiEvent.ShowSnackbar(
-                        "Task deleted",
-                        "Undo"
-                    ))
+                    sendUiEvent(
+                        UiEvent.ShowSnackbar(
+                            "Task deleted",
+                            "Undo"
+                        )
+                    )
                 }
             }
+
             is TaskListEvent.OnAddTaskClick -> {
                 sendUiEvent(UiEvent.Navigate(Routes.ADD_EDIT_TASK))
             }
+
             is TaskListEvent.OnTaskClick -> {
                 sendUiEvent(UiEvent.Navigate(Routes.ADD_EDIT_TASK + "?taskId=${event.task.id}"))
             }
+
             is TaskListEvent.OnDoneChangeTask -> {
                 viewModelScope.launch {
                     repository.insertTodo(
@@ -52,6 +56,7 @@ class TaskListViewModel @Inject constructor(
                     )
                 }
             }
+
             is TaskListEvent.OnUndoDeleteClick -> {
                 deletedTodo?.let { todo ->
                     viewModelScope.launch {
@@ -61,7 +66,8 @@ class TaskListViewModel @Inject constructor(
             }
         }
     }
-// sending event to update the ui and perfom task
+
+    // sending event to update the ui and perfom task
     private fun sendUiEvent(event: UiEvent) {
         viewModelScope.launch {
             _uiEvent.send(event)

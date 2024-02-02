@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 class Repository(
     private val dao: Dao
-): RepositoryInf {
+) : RepositoryInf {
 
     override suspend fun insertTodo(todo: TaskEntity) {
         dao.insertTask(todo)

@@ -35,19 +35,20 @@ fun TaskListScreen(
 ) {
     val tasks = viewModel.tasks.collectAsState(initial = emptyList())
     val snackBarHostState = remember { SnackbarHostState() }
-    LaunchedEffect(key1 = true){
+    LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect { event ->
-            when(event) {
+            when (event) {
                 is UiEvent.ShowSnackbar -> {
                     val result = snackBarHostState.showSnackbar(
                         message = event.message,
                         actionLabel = event.action,
                         duration = SnackbarDuration.Short
                     )
-                    if (result == SnackbarResult.ActionPerformed){
+                    if (result == SnackbarResult.ActionPerformed) {
                         viewModel.onEvent(TaskListEvent.OnUndoDeleteClick)
                     }
                 }
+
                 is UiEvent.Navigate -> onNavigate(event)
                 else -> Unit
             }
@@ -61,12 +62,15 @@ fun TaskListScreen(
             }) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "Add" )
+                    contentDescription = "Add"
+                )
             }
         }
     ) {
         LazyColumn(
-            modifier = Modifier.fillMaxSize().padding(it)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
         ) {
             items(tasks.value.reversed()) { task ->
                 Card(
@@ -75,16 +79,18 @@ fun TaskListScreen(
                         .fillMaxWidth()
                         .padding(16.dp)
                 )
-                 {
-                     TaskItem(
-                         task = task,
-                         onEvent = viewModel::onEvent,
-                         modifier = Modifier.fillMaxWidth().clickable{
-                             viewModel.onEvent(TaskListEvent.OnTaskClick(task))
-                         }
-                             .padding(16.dp)
-                     )
-            }
+                {
+                    TaskItem(
+                        task = task,
+                        onEvent = viewModel::onEvent,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                viewModel.onEvent(TaskListEvent.OnTaskClick(task))
+                            }
+                            .padding(16.dp)
+                    )
+                }
 
             }
         }
