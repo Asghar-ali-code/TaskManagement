@@ -1,6 +1,6 @@
 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐦𝐞𝐧𝐭 𝐒𝐭𝐫𝐚𝐭𝐞𝐠𝐲:
 
-The development process involves the utilization of branches to facilitate efficient collaboration among developers. Developers are encouraged to create branches for their respective tasks, enabling them to work on features or fixes independently. Additionally, developers have the flexibility to create their own branches derived from the development branch.
+The development process involves the utilization of branches to facilitate efficient collaboration among developers. Developers are encouraged to create branches for their respective tasks, enabling them to work on features or fixes independently. Additionally, 𝐝𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫𝐬 𝐡𝐚𝐯𝐞 𝐭𝐡𝐞 𝐟𝐥𝐞𝐱𝐢𝐛𝐢𝐥𝐢𝐭𝐲 𝐭𝐨 𝐜𝐫𝐞𝐚𝐭𝐞 𝐭𝐡𝐞𝐢𝐫 𝐨𝐰𝐧 𝐛𝐫𝐚𝐧𝐜𝐡𝐞𝐬 𝐝𝐞𝐫𝐢𝐯𝐞𝐝 𝐟𝐫𝐨𝐦 𝐭𝐡𝐞 𝐝𝐞𝐯𝐞𝐥𝐨𝐩𝐦𝐞𝐧𝐭 𝐛𝐫𝐚𝐧𝐜𝐡.
 
 𝐐𝐮𝐚𝐥𝐢𝐭𝐲 𝐀𝐬𝐬𝐮𝐫𝐚𝐧𝐜𝐞 (𝐐𝐀) 𝐒𝐭𝐫𝐚𝐭𝐞𝐠𝐲:
 
